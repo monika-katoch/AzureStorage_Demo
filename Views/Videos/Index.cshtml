@@ -1,0 +1,66 @@
+@model VideoPageViewModel
+@{
+    ViewData["Title"] = "Videos";
+}
+
+@if (TempData["Success"] is string ok) { <div class="alert ok">@ok</div> }
+@if (TempData["Error"] is string err) { <div class="alert err">@err</div> }
+
+@if (!string.IsNullOrEmpty(Model.NowPlaying))
+{
+    <div class="card">
+        <h2>Now playing</h2>
+        <video controls autoplay preload="metadata" style="width:100%; max-height:460px; background:#000; border-radius:8px;">
+            <source src="/Videos/Stream?blobName=@Uri.EscapeDataString(Model.NowPlaying)" />
+            Your browser does not support HTML5 video.
+        </video>
+        <p class="muted" style="margin-top:10px;">
+            Streamed from <code>@Model.ContainerName</code> via <code>/Videos/Stream</code> with HTTP range requests —
+            drag the scrubber and playback jumps instantly without downloading the whole file.
+        </p>
+    </div>
+}
+
+<div class="card">
+    <h2>Upload a video</h2>
+    <form asp-action="Upload" asp-controller="Videos" method="post" enctype="multipart/form-data">
+        @Html.AntiForgeryToken()
+        <input type="file" name="file" accept="video/mp4,video/webm,.mp4,.m4v,.webm" required />
+        <button type="submit" class="btn">Upload</button>
+    </form>
+    <p class="muted">
+        Container: <code>@Model.ContainerName</code> · Max size: @Model.MaxFileSizeDisplay ·
+        Allowed: mp4, m4v, webm. Uploaded in 8&nbsp;MB blocks; streamed back on demand.
+    </p>
+</div>
+
+<div class="card">
+    <h2>Library (@Model.Videos.Count)</h2>
+    @if (Model.Videos.Count == 0)
+    {
+        <div class="empty">No videos yet — upload one above to see range streaming in action.</div>
+    }
+    else
+    {
+        <table>
+            <thead>
+                <tr><th>Name</th><th>Type</th><th>Size</th><th>Uploaded</th><th>Actions</th></tr>
+            </thead>
+            <tbody>
+                @foreach (var v in Model.Videos)
+                {
+                    <tr>
+                        <td style="word-break:break-all;">@v.Name</td>
+                        <td>@v.ContentType</td>
+                        <td>@v.SizeDisplay</td>
+                        <td>@(v.LastModified?.LocalDateTime.ToString("g") ?? "—")</td>
+                        <td style="white-space:nowrap;">
+                            <a class="btn" asp-action="Index" asp-route-play="@v.Name">▶ Play</a>
+                            <a class="btn secondary" asp-action="Stream" asp-route-blobName="@v.Name" target="_blank">Open stream</a>
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    }
+</div>

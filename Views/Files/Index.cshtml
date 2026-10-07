@@ -1,0 +1,72 @@
+@model FileListViewModel
+@{
+    ViewData["Title"] = "Files";
+}
+
+@if (TempData["Success"] is string ok)
+{
+    <div class="alert ok">@ok</div>
+}
+@if (TempData["Error"] is string err)
+{
+    <div class="alert err">@err</div>
+}
+@if (TempData["SasLink"] is string sas)
+{
+    <div class="alert info">
+        <strong>SAS link (expires in @TempData["SasExpiry"]):</strong><br />
+        <a href="@sas" target="_blank" rel="noopener">@sas</a>
+    </div>
+}
+
+<div class="card">
+    <h2>Upload a file</h2>
+    <form asp-action="Upload" asp-controller="Files" method="post" enctype="multipart/form-data">
+        @Html.AntiForgeryToken()
+        <input type="file" name="file" required />
+        <button type="submit" class="btn">Upload</button>
+    </form>
+    <p class="muted">
+        Container: <code>@Model.ContainerName</code> ·
+        Max size: @Model.MaxFileSizeDisplay ·
+        Allowed: pdf, png, jpg, jpeg, gif, mp4, zip, txt, csv, json.
+        Files are validated by signature and stored under a unique GUID name.
+    </p>
+</div>
+
+<div class="card">
+    <h2>Stored files (@Model.Files.Count)</h2>
+    @if (Model.Files.Count == 0)
+    {
+        <div class="empty">No files yet — upload one above.</div>
+    }
+    else
+    {
+        <table>
+            <thead>
+                <tr>
+                    <th>Name</th>
+                    <th>Type</th>
+                    <th>Size</th>
+                    <th>Uploaded</th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var f in Model.Files)
+                {
+                    <tr>
+                        <td style="word-break:break-all;">@f.Name</td>
+                        <td>@f.ContentType</td>
+                        <td>@f.SizeDisplay</td>
+                        <td>@(f.LastModified?.LocalDateTime.ToString("g") ?? "—")</td>
+                        <td style="white-space:nowrap;">
+                            <a class="btn" asp-action="Download" asp-route-blobName="@f.Name">Download</a>
+                            <a class="btn secondary" asp-action="SasLink" asp-route-blobName="@f.Name">SAS link</a>
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    }
+</div>

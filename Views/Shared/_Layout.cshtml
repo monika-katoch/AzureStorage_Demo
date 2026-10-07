@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>@ViewData["Title"] - Blob Storage Demo</title>
+    <style>
+        :root { --bg:#f5f6f8; --card:#fff; --border:#e3e6ea; --accent:#0b6bcb; --muted:#6b7280; }
+        * { box-sizing: border-box; }
+        body { margin:0; font-family: system-ui, Segoe UI, sans-serif; background:var(--bg); color:#1f2937; }
+        header { background:#0b1f33; color:#fff; padding:16px 24px; }
+        header .wrap { max-width:960px; margin:0 auto; display:flex; align-items:center; justify-content:space-between; gap:16px; flex-wrap:wrap; }
+        header h1 { margin:0; font-size:1.15rem; }
+        header small { color:#9db4c9; display:block; margin-top:2px; }
+        nav.top { display:flex; gap:6px; }
+        nav.top a { color:#c9d8e6; text-decoration:none; font-size:.9rem; font-weight:600;
+            padding:8px 14px; border-radius:7px; transition:background .12s, color .12s; }
+        nav.top a:hover { background:#16324d; color:#fff; }
+        nav.top a.active { background:var(--accent); color:#fff; }
+        main { max-width:960px; margin:24px auto; padding:0 16px; }
+        .card { background:var(--card); border:1px solid var(--border); border-radius:10px; padding:20px; margin-bottom:20px; }
+        .card h2 { margin-top:0; font-size:1rem; text-transform:uppercase; letter-spacing:.04em; color:var(--muted); }
+        table { width:100%; border-collapse:collapse; }
+        th, td { text-align:left; padding:10px 8px; border-bottom:1px solid var(--border); font-size:.92rem; }
+        th { color:var(--muted); font-weight:600; }
+        a.btn, button.btn { display:inline-block; background:var(--accent); color:#fff; border:none; padding:7px 14px;
+            border-radius:6px; font-size:.85rem; cursor:pointer; text-decoration:none; }
+        a.btn.secondary { background:#e8eef5; color:#0b1f33; }
+        .alert { padding:12px 14px; border-radius:8px; margin-bottom:16px; font-size:.9rem; }
+        .alert.ok { background:#e6f6ec; color:#1a7f37; border:1px solid #b7e4c7; }
+        .alert.err { background:#fdecec; color:#b42318; border:1px solid #f5c2c0; }
+        .alert.info { background:#eef4fd; color:#0b4a8a; border:1px solid #c5dbf6; word-break:break-all; }
+        input[type=file] { font-size:.9rem; }
+        .muted { color:var(--muted); font-size:.85rem; }
+        .empty { text-align:center; color:var(--muted); padding:24px; }
+
+        /* stat tiles */
+        .tiles { display:grid; grid-template-columns:repeat(4,1fr); gap:12px; }
+        .tile { background:var(--card); border:1px solid var(--border); border-radius:10px; padding:14px 16px; }
+        .tile .n { font-size:1.6rem; font-weight:700; line-height:1; }
+        .tile .l { color:var(--muted); font-size:.75rem; text-transform:uppercase; letter-spacing:.05em; margin-top:6px; }
+        .tile.amber .n { color:#b26a00; }
+        .tile.green .n { color:#1a7f37; }
+        .tile.blue  .n { color:var(--accent); }
+
+        /* badges */
+        .badge { display:inline-flex; align-items:center; gap:5px; padding:3px 9px; border-radius:999px;
+            font-size:.78rem; font-weight:600; }
+        .badge.ok { background:#e6f6ec; color:#1a7f37; }
+        .badge.pending { background:#fff4e2; color:#b26a00; }
+
+        /* filter pills */
+        .pills { display:flex; flex-wrap:wrap; gap:8px; }
+        .pill { padding:6px 13px; border-radius:999px; border:1px solid var(--border); background:#fff;
+            color:#374151; text-decoration:none; font-size:.85rem; }
+        .pill:hover { border-color:var(--accent); color:var(--accent); }
+        .pill.active { background:var(--accent); color:#fff; border-color:var(--accent); }
+
+        /* form grid */
+        .form-grid { display:grid; grid-template-columns:repeat(auto-fit,minmax(150px,1fr)); gap:14px; }
+        .form-grid label { display:flex; flex-direction:column; gap:5px; font-size:.82rem; font-weight:600; color:#374151; }
+        .form-grid input, .form-grid select { padding:8px 10px; border:1px solid var(--border); border-radius:7px;
+            font-size:.9rem; font-weight:400; }
+        .form-grid input:focus, .form-grid select:focus { outline:2px solid #cfe0f5; border-color:var(--accent); }
+
+        @@media (max-width:640px){ .tiles{ grid-template-columns:repeat(2,1fr);} }
+    </style>
+</head>
+<body>
+    @{
+        var activeController = ViewContext.RouteData.Values["controller"]?.ToString();
+        string NavClass(string c) => string.Equals(activeController, c, StringComparison.OrdinalIgnoreCase) ? "active" : "";
+    }
+    <header>
+        <div class="wrap">
+            <div>
+                <h1>📦 Azure Storage Demo</h1>
+                <small>ASP.NET Core MVC · Azurite (local)</small>
+            </div>
+            <nav class="top">
+                <a class="@NavClass("Files")" href="/Files">📁 Files</a>
+                <a class="@NavClass("Videos")" href="/Videos">🎬 Videos</a>
+                <a class="@NavClass("Orders")" href="/Orders">🧾 Orders</a>
+            </nav>
+        </div>
+    </header>
+    <main>
+        @RenderBody()
+    </main>
+</body>
+</html>

@@ -10,6 +10,7 @@ builder.Services.Configure<BlobStorageOptions>(
 
 var blobOptions = builder.Configuration
     .GetSection(BlobStorageOptions.SectionName)
+    .GetSection(BlobStorageOptions.SectionName) // Goes to the second layer
     .Get<BlobStorageOptions>() ?? new BlobStorageOptions();
 
 

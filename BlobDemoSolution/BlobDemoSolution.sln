@@ -1,0 +1,22 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "blob-demo", "..\blob-demo\blob-demo.csproj", "{C5D62DC0-AA7C-4E1D-AC05-1E01E86A8A12}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FuncQueue_Demo", "FuncQueue_Demo\FuncQueue_Demo.csproj", "{A076974C-5518-411F-97C6-2EC93303329D}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{C5D62DC0-AA7C-4E1D-AC05-1E01E86A8A12}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C5D62DC0-AA7C-4E1D-AC05-1E01E86A8A12}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C5D62DC0-AA7C-4E1D-AC05-1E01E86A8A12}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C5D62DC0-AA7C-4E1D-AC05-1E01E86A8A12}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A076974C-5518-411F-97C6-2EC93303329D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A076974C-5518-411F-97C6-2EC93303329D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A076974C-5518-411F-97C6-2EC93303329D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A076974C-5518-411F-97C6-2EC93303329D}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+EndGlobal

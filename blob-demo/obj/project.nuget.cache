@@ -1,0 +1,22 @@
+{
+  "version": 2,
+  "dgSpecHash": "qTe7+kr0zTs=",
+  "success": true,
+  "projectFilePath": "/Users/user/Documents/Questpond_Training/Azure/AzureStorageDemo/blob-demo/blob-demo.csproj",
+  "expectedPackageFiles": [
+    "/Users/user/.nuget/packages/azure.core/1.55.0/azure.core.1.55.0.nupkg.sha512",
+    "/Users/user/.nuget/packages/azure.data.tables/12.11.0/azure.data.tables.12.11.0.nupkg.sha512",
+    "/Users/user/.nuget/packages/azure.storage.blobs/12.29.2/azure.storage.blobs.12.29.2.nupkg.sha512",
+    "/Users/user/.nuget/packages/azure.storage.common/12.28.0/azure.storage.common.12.28.0.nupkg.sha512",
+    "/Users/user/.nuget/packages/azure.storage.queues/12.24.0/azure.storage.queues.12.24.0.nupkg.sha512",
+    "/Users/user/.nuget/packages/microsoft.bcl.asyncinterfaces/10.0.3/microsoft.bcl.asyncinterfaces.10.0.3.nupkg.sha512",
+    "/Users/user/.nuget/packages/microsoft.identity.client/4.83.1/microsoft.identity.client.4.83.1.nupkg.sha512",
+    "/Users/user/.nuget/packages/microsoft.identity.client.extensions.msal/4.83.1/microsoft.identity.client.extensions.msal.4.83.1.nupkg.sha512",
+    "/Users/user/.nuget/packages/microsoft.identitymodel.abstractions/8.14.0/microsoft.identitymodel.abstractions.8.14.0.nupkg.sha512",
+    "/Users/user/.nuget/packages/system.clientmodel/1.11.0/system.clientmodel.1.11.0.nupkg.sha512",
+    "/Users/user/.nuget/packages/system.io.hashing/10.0.3/system.io.hashing.10.0.3.nupkg.sha512",
+    "/Users/user/.nuget/packages/system.memory.data/10.0.3/system.memory.data.10.0.3.nupkg.sha512",
+    "/Users/user/.nuget/packages/system.security.cryptography.protecteddata/4.5.0/system.security.cryptography.protecteddata.4.5.0.nupkg.sha512"
+  ],
+  "logs": []
+}
